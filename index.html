@@ -26,30 +26,45 @@ input {
 }
 
 button {
-  padding:12px 20px;
+  padding:12px;
   border:none;
   border-radius:10px;
   background:linear-gradient(45deg,#ff4d6d,#c77dff);
   color:white;
   margin-top:10px;
-  cursor:pointer;
+  width:80%;
 }
 
-/* PERFIL */
-.header {
+/* CAPA */
+.banner {
+  height:180px;
+  background:linear-gradient(45deg,#ff4d6d,#c77dff);
+  border-bottom-left-radius:25px;
+  border-bottom-right-radius:25px;
+}
+
+/* FOTO */
+.profile {
   text-align:center;
-  padding:20px;
+  margin-top:-50px;
 }
 
-.header img {
-  width:80px;
-  height:80px;
+.profile img {
+  width:100px;
+  height:100px;
   border-radius:50%;
+  object-fit:cover;
+  border:4px solid white;
+}
+
+/* TEXTO */
+.titulo {
+  text-align:center;
 }
 
 /* PROGRESSO */
 .progress-container {
-  padding:15px;
+  padding:20px;
 }
 
 .progress-bar {
@@ -76,8 +91,8 @@ button {
   padding:15px;
   border-radius:15px;
   margin-bottom:10px;
-  cursor:pointer;
   box-shadow:0 2px 6px rgba(0,0,0,0.05);
+  cursor:pointer;
 }
 
 /* AULA */
@@ -85,6 +100,18 @@ button {
   display:none;
   padding:20px;
   text-align:center;
+}
+
+/* MENU */
+.menu {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+  border-top:1px solid #ddd;
 }
 </style>
 </head>
@@ -95,19 +122,23 @@ button {
 <div id="login">
   <h2>✨ Bem-vinda</h2>
   <input type="email" id="email" placeholder="Digite seu e-mail">
-  <br>
   <button onclick="entrar()">Entrar</button>
 </div>
 
 <!-- HOME -->
 <div id="home" style="display:none;">
 
-  <div class="header">
-    <img src="https://i.imgur.com/8Km9tLL.png">
-    <h2>Hola, Artesana 💖</h2>
+  <div class="banner"></div>
+
+  <div class="profile">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...">
   </div>
 
-  <!-- PROGRESSO -->
+  <div class="titulo">
+    <h2>Isabella Torres</h2>
+    <p>Joyas Rentables Sin Horno</p>
+  </div>
+
   <div class="progress-container">
     <p>Seu progresso</p>
     <div class="progress-bar">
@@ -117,11 +148,11 @@ button {
 
   <div class="container">
 
-    <div class="card" onclick="abrirModulo(1)">Módulo 1</div>
-    <div class="card" onclick="abrirModulo(2)">Módulo 2</div>
-    <div class="card" onclick="abrirModulo(3)">Módulo 3</div>
-    <div class="card" onclick="abrirModulo(4)">Módulo 4</div>
-    <div class="card" onclick="abrirModulo(5)">Módulo 5</div>
+    <div class="card" onclick="abrirModulo(1)">📚 Módulo 1</div>
+    <div class="card" onclick="abrirModulo(2)">📚 Módulo 2</div>
+    <div class="card" onclick="abrirModulo(3)">📚 Módulo 3</div>
+    <div class="card" onclick="abrirModulo(4)">📚 Módulo 4</div>
+    <div class="card" onclick="abrirModulo(5)">📚 Módulo 5</div>
 
     <div class="card" onclick="abrirBonus()">🎁 Bônus</div>
 
@@ -137,7 +168,6 @@ button {
 
 <script>
 
-// LOGIN
 function entrar(){
   let email = document.getElementById("email").value;
 
@@ -150,112 +180,39 @@ function entrar(){
 
   document.getElementById("login").style.display="none";
   document.getElementById("home").style.display="block";
-
-  atualizarProgresso();
-}
-
-// AUTO LOGIN
-window.onload = function(){
-  let email = localStorage.getItem("email");
-
-  if(email){
-    document.getElementById("login").style.display="none";
-    document.getElementById("home").style.display="block";
-  }
-
-  atualizarProgresso();
-}
-
-// PROGRESSO
-function concluirAula(id){
-  localStorage.setItem("aula"+id,"ok");
-  atualizarProgresso();
-}
-
-function atualizarProgresso(){
-  let total = 10;
-  let feitas = 0;
-
-  for(let i=1;i<=total;i++){
-    if(localStorage.getItem("aula"+i)){
-      feitas++;
-    }
-  }
-
-  let porcentagem = (feitas/total)*100;
-  document.getElementById("progress").style.width = porcentagem + "%";
 }
 
 // MÓDULOS
 function abrirModulo(modulo){
-
   document.getElementById("home").style.display="none";
   document.getElementById("aulas").style.display="block";
 
-  let conteudo = "";
+  document.getElementById("aulas").innerHTML = `
+    <h2>Módulo ${modulo}</h2>
 
-  if(modulo == 1){
-    conteudo = `
-      <h2>Módulo 1</h2>
-      <div class="card" onclick="abrirAula('4JGlMIsn3o8',1)">Aula 1</div>
-      <div class="card" onclick="abrirAula('TknQZLggxxY',2)">Aula 2</div>
-    `;
-  }
+    <div class="card" onclick="abrirAula('4JGlMIsn3o8')">Aula 1</div>
+    <div class="card" onclick="abrirAula('TknQZLggxxY')">Aula 2</div>
 
-  if(modulo == 2){
-    conteudo = `
-      <h2>Módulo 2</h2>
-      <div class="card" onclick="abrirAula('mpOl2ue1eZo',3)">Aula 1</div>
-    `;
-  }
-
-  if(modulo == 3){
-    conteudo = `
-      <h2>Módulo 3</h2>
-      <div class="card" onclick="abrirAula('4JGlMIsn3o8',4)">Aula 1</div>
-    `;
-  }
-
-  if(modulo == 4){
-    conteudo = `
-      <h2>Módulo 4</h2>
-      <div class="card" onclick="abrirAula('TknQZLggxxY',5)">Aula 1</div>
-    `;
-  }
-
-  if(modulo == 5){
-    conteudo = `
-      <h2>Módulo 5</h2>
-      <div class="card" onclick="abrirAula('mpOl2ue1eZo',6)">Aula 1</div>
-    `;
-  }
-
-  document.getElementById("aulas").innerHTML = conteudo + `
-    <br>
-    <button onclick="voltarModulos()">⬅ Voltar</button>
+    <button onclick="voltar()">⬅ Voltar</button>
   `;
 }
 
 // BÔNUS
 function abrirBonus(){
-
   document.getElementById("home").style.display="none";
   document.getElementById("aulas").style.display="block";
 
   document.getElementById("aulas").innerHTML = `
     <h2>🎁 Bônus</h2>
 
-    <div class="card" onclick="abrirAula('4JGlMIsn3o8',7)">Bônus 1</div>
-    <div class="card" onclick="abrirAula('TknQZLggxxY',8)">Bônus 2</div>
+    <div class="card" onclick="abrirAula('mpOl2ue1eZo')">Bônus 1</div>
 
-    <br>
-    <button onclick="voltarModulos()">⬅ Voltar</button>
+    <button onclick="voltar()">⬅ Voltar</button>
   `;
 }
 
 // AULA
-function abrirAula(videoId,id){
-
+function abrirAula(videoId){
   document.getElementById("aulas").style.display="none";
   document.getElementById("aula").style.display="block";
 
@@ -265,28 +222,19 @@ function abrirAula(videoId,id){
 
     <br><br>
 
-    <button onclick="concluirAula(${id})">✅ Concluir aula</button>
-
-    <br><br>
-
     <a href="https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3">
       <button>📄 Baixar PDF</button>
     </a>
 
     <br><br>
 
-    <button onclick="voltarAulas()">⬅ Voltar</button>
+    <button onclick="voltar()">⬅ Voltar</button>
   `;
 }
 
-// VOLTAR
-function voltarModulos(){
+function voltar(){
   document.getElementById("home").style.display="block";
   document.getElementById("aulas").style.display="none";
-}
-
-function voltarAulas(){
-  document.getElementById("aulas").style.display="block";
   document.getElementById("aula").style.display="none";
 }
 
@@ -294,3 +242,4 @@ function voltarAulas(){
 
 </body>
 </html>
+
