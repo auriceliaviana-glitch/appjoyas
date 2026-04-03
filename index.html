@@ -1,245 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso</title>
+Quiero que edites mi aplicación.
 
-<style>
-body {
-  margin:0;
-  font-family: Arial;
-  background:#f9f5ff;
-}
+Dentro del Módulo 2, agrega una nueva clase (aula).
 
-/* LOGIN */
-#login {
-  text-align:center;
-  padding:40px;
-}
+Título de la clase:
+"Aula 1 - Materiales necesarios"
 
-input {
-  padding:12px;
-  width:80%;
-  border-radius:10px;
-  border:1px solid #ddd;
-}
+La clase debe incluir:
 
-button {
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(45deg,#ff4d6d,#c77dff);
-  color:white;
-  margin-top:10px;
-  width:80%;
-}
+1. Un video de YouTube usando este embed:
 
-/* CAPA */
-.banner {
-  height:180px;
-  background:linear-gradient(45deg,#ff4d6d,#c77dff);
-  border-bottom-left-radius:25px;
-  border-bottom-right-radius:25px;
-}
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/TknQZLggxxY" frameborder="0" allowfullscreen></iframe>
 
-/* FOTO */
-.profile {
-  text-align:center;
-  margin-top:-50px;
-}
+2. Un botón para descargar el PDF con este enlace:
+   https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3
 
-.profile img {
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
-  border:4px solid white;
-}
+Texto del botón:
+"📄 Descargar PDF"
 
-/* TEXTO */
-.titulo {
-  text-align:center;
-}
+3. Un botón para marcar la clase como completada.
 
-/* PROGRESSO */
-.progress-container {
-  padding:20px;
-}
+4. Mantener el diseño con colores rosa y lila, con bordes redondeados y estilo moderno.
 
-.progress-bar {
-  width:100%;
-  height:10px;
-  background:#eee;
-  border-radius:10px;
-}
+5. La clase debe aparecer dentro de la lista de clases del Módulo 2.
 
-.progress {
-  height:10px;
-  width:0%;
-  background:linear-gradient(45deg,#ff4d6d,#c77dff);
-  border-radius:10px;
-}
-
-/* CARDS */
-.container {
-  padding:15px;
-}
-
-.card {
-  background:white;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.05);
-  cursor:pointer;
-}
-
-/* AULA */
-#aula {
-  display:none;
-  padding:20px;
-  text-align:center;
-}
-
-/* MENU */
-.menu {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:white;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  border-top:1px solid #ddd;
-}
-</style>
-</head>
-
-<body>
-
-<!-- LOGIN -->
-<div id="login">
-  <h2>✨ Bem-vinda</h2>
-  <input type="email" id="email" placeholder="Digite seu e-mail">
-  <button onclick="entrar()">Entrar</button>
-</div>
-
-<!-- HOME -->
-<div id="home" style="display:none;">
-
-  <div class="banner"></div>
-
-  <div class="profile">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...">
-  </div>
-
-  <div class="titulo">
-    <h2>Isabella Torres</h2>
-    <p>Joyas Rentables Sin Horno</p>
-  </div>
-
-  <div class="progress-container">
-    <p>Seu progresso</p>
-    <div class="progress-bar">
-      <div id="progress" class="progress"></div>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <div class="card" onclick="abrirModulo(1)">📚 Módulo 1</div>
-    <div class="card" onclick="abrirModulo(2)">📚 Módulo 2</div>
-    <div class="card" onclick="abrirModulo(3)">📚 Módulo 3</div>
-    <div class="card" onclick="abrirModulo(4)">📚 Módulo 4</div>
-    <div class="card" onclick="abrirModulo(5)">📚 Módulo 5</div>
-
-    <div class="card" onclick="abrirBonus()">🎁 Bônus</div>
-
-  </div>
-
-</div>
-
-<!-- AULAS -->
-<div id="aulas" style="display:none;" class="container"></div>
-
-<!-- AULA -->
-<div id="aula"></div>
-
-<script>
-
-function entrar(){
-  let email = document.getElementById("email").value;
-
-  if(email == ""){
-    alert("Digite seu e-mail");
-    return;
-  }
-
-  localStorage.setItem("email", email);
-
-  document.getElementById("login").style.display="none";
-  document.getElementById("home").style.display="block";
-}
-
-// MÓDULOS
-function abrirModulo(modulo){
-  document.getElementById("home").style.display="none";
-  document.getElementById("aulas").style.display="block";
-
-  document.getElementById("aulas").innerHTML = `
-    <h2>Módulo ${modulo}</h2>
-
-    <div class="card" onclick="abrirAula('4JGlMIsn3o8')">Aula 1</div>
-    <div class="card" onclick="abrirAula('TknQZLggxxY')">Aula 2</div>
-
-    <button onclick="voltar()">⬅ Voltar</button>
-  `;
-}
-
-// BÔNUS
-function abrirBonus(){
-  document.getElementById("home").style.display="none";
-  document.getElementById("aulas").style.display="block";
-
-  document.getElementById("aulas").innerHTML = `
-    <h2>🎁 Bônus</h2>
-
-    <div class="card" onclick="abrirAula('mpOl2ue1eZo')">Bônus 1</div>
-
-    <button onclick="voltar()">⬅ Voltar</button>
-  `;
-}
-
-// AULA
-function abrirAula(videoId){
-  document.getElementById("aulas").style.display="none";
-  document.getElementById("aula").style.display="block";
-
-  document.getElementById("aula").innerHTML = `
-    <iframe width="100%" height="250"
-    src="https://www.youtube.com/embed/${videoId}"></iframe>
-
-    <br><br>
-
-    <a href="https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3">
-      <button>📄 Baixar PDF</button>
-    </a>
-
-    <br><br>
-
-    <button onclick="voltar()">⬅ Voltar</button>
-  `;
-}
-
-function voltar(){
-  document.getElementById("home").style.display="block";
-  document.getElementById("aulas").style.display="none";
-  document.getElementById("aula").style.display="none";
-}
-
-</script>
-
-</body>
-</html>
+Haz que todo sea responsivo y funcione bien en celular.
 
