@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -9,88 +9,75 @@
 body {
   margin:0;
   font-family: Arial;
-  background:#f5f5f5;
+  background:#f9f5ff;
 }
 
-/* BANNER */
-.banner {
-  width:100%;
-  height:200px;
-  background:url('https://i.imgur.com/3ZQ3Z6k.jpg') center/cover;
-  border-bottom-left-radius:20px;
-  border-bottom-right-radius:20px;
+/* LOGIN */
+#login {
+  text-align:center;
+  padding:40px;
+}
+
+input {
+  padding:12px;
+  width:80%;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+button {
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(45deg,#ff4d6d,#c77dff);
+  color:white;
+  margin-top:10px;
+  cursor:pointer;
 }
 
 /* PERFIL */
-.profile {
+.header {
   text-align:center;
-  margin-top:-40px;
-}
-
-.profile img {
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  border:4px solid white;
-}
-
-.profile h2 {
-  margin:10px 0 5px;
-}
-
-.profile p {
-  color:gray;
-  font-size:14px;
-}
-
-/* CONTAINER */
-.container {
   padding:20px;
 }
 
+.header img {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+}
+
+/* PROGRESSO */
+.progress-container {
+  padding:15px;
+}
+
+.progress-bar {
+  width:100%;
+  height:10px;
+  background:#eee;
+  border-radius:10px;
+}
+
+.progress {
+  height:10px;
+  width:0%;
+  background:linear-gradient(45deg,#ff4d6d,#c77dff);
+  border-radius:10px;
+}
+
 /* CARDS */
+.container {
+  padding:15px;
+}
+
 .card {
   background:white;
   padding:15px;
   border-radius:15px;
   margin-bottom:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   cursor:pointer;
-}
-
-.card img {
-  width:50px;
-  height:50px;
-  border-radius:10px;
-  margin-right:10px;
-}
-
-.left {
-  display:flex;
-  align-items:center;
-}
-
-.title {
-  font-size:14px;
-}
-
-.time {
-  font-size:12px;
-  color:gray;
-}
-
-/* MENU */
-.menu {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:white;
-  display:flex;
-  justify-content:space-around;
-  padding:10px;
-  border-top:1px solid #ddd;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
 
 /* AULA */
@@ -104,81 +91,205 @@ body {
 
 <body>
 
-<!-- BANNER -->
-<div class="banner"></div>
-
-<!-- PERFIL -->
-<div class="profile">
-  <img src="https://i.imgur.com/8Km9tLL.png">
-  <h2>Hola, ¡Artesana! ✨</h2>
-  <p>Bienvenida al curso de Isabella Torres</p>
+<!-- LOGIN -->
+<div id="login">
+  <h2>✨ Bem-vinda</h2>
+  <input type="email" id="email" placeholder="Digite seu e-mail">
+  <br>
+  <button onclick="entrar()">Entrar</button>
 </div>
 
-<!-- LISTA -->
-<div id="home" class="container">
+<!-- HOME -->
+<div id="home" style="display:none;">
 
-  <h3>Módulo 1: Introducción</h3>
-
-  <div class="card" onclick="abrirAula('4JGlMIsn3o8')">
-    <div class="left">
-      <img src="https://i.imgur.com/8Km9tLL.png">
-      <div>
-        <div class="title">Bienvenida</div>
-        <div class="time">3:00</div>
-      </div>
-    </div>
-    ▶
+  <div class="header">
+    <img src="https://i.imgur.com/8Km9tLL.png">
+    <h2>Hola, Artesana 💖</h2>
   </div>
 
-  <h3>Módulo 5: Cómo vender</h3>
-
-  <div class="card" onclick="abrirAula('TknQZLggxxY')">
-    <div class="left">
-      <img src="https://i.imgur.com/8Km9tLL.png">
-      <div>
-        <div class="title">Cómo vender en Instagram</div>
-        <div class="time">25:30</div>
-      </div>
+  <!-- PROGRESSO -->
+  <div class="progress-container">
+    <p>Seu progresso</p>
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
     </div>
-    ▶
+  </div>
+
+  <div class="container">
+
+    <div class="card" onclick="abrirModulo(1)">Módulo 1</div>
+    <div class="card" onclick="abrirModulo(2)">Módulo 2</div>
+    <div class="card" onclick="abrirModulo(3)">Módulo 3</div>
+    <div class="card" onclick="abrirModulo(4)">Módulo 4</div>
+    <div class="card" onclick="abrirModulo(5)">Módulo 5</div>
+
+    <div class="card" onclick="abrirBonus()">🎁 Bônus</div>
+
   </div>
 
 </div>
+
+<!-- AULAS -->
+<div id="aulas" style="display:none;" class="container"></div>
 
 <!-- AULA -->
-<div id="aula">
-  <iframe id="video"
-    width="100%"
-    height="250"
-    src=""
-    frameborder="0"
-    allowfullscreen>
-  </iframe>
-
-  <br><br>
-
-  <button onclick="voltar()">⬅ Voltar</button>
-</div>
-
-<!-- MENU -->
-<div class="menu">
-  <div onclick="voltar()">🏠<br>Inicio</div>
-  <div>🎁<br>Bônus</div>
-  <div>👤<br>Perfil</div>
-</div>
+<div id="aula"></div>
 
 <script>
-function abrirAula(videoId){
-  document.getElementById("home").style.display="none";
-  document.getElementById("aula").style.display="block";
-  document.getElementById("video").src="https://www.youtube.com/embed/"+videoId;
+
+// LOGIN
+function entrar(){
+  let email = document.getElementById("email").value;
+
+  if(email == ""){
+    alert("Digite seu e-mail");
+    return;
+  }
+
+  localStorage.setItem("email", email);
+
+  document.getElementById("login").style.display="none";
+  document.getElementById("home").style.display="block";
+
+  atualizarProgresso();
 }
 
-function voltar(){
-  document.getElementById("home").style.display="block";
-  document.getElementById("aula").style.display="none";
-  document.getElementById("video").src="";
+// AUTO LOGIN
+window.onload = function(){
+  let email = localStorage.getItem("email");
+
+  if(email){
+    document.getElementById("login").style.display="none";
+    document.getElementById("home").style.display="block";
+  }
+
+  atualizarProgresso();
 }
+
+// PROGRESSO
+function concluirAula(id){
+  localStorage.setItem("aula"+id,"ok");
+  atualizarProgresso();
+}
+
+function atualizarProgresso(){
+  let total = 10;
+  let feitas = 0;
+
+  for(let i=1;i<=total;i++){
+    if(localStorage.getItem("aula"+i)){
+      feitas++;
+    }
+  }
+
+  let porcentagem = (feitas/total)*100;
+  document.getElementById("progress").style.width = porcentagem + "%";
+}
+
+// MÓDULOS
+function abrirModulo(modulo){
+
+  document.getElementById("home").style.display="none";
+  document.getElementById("aulas").style.display="block";
+
+  let conteudo = "";
+
+  if(modulo == 1){
+    conteudo = `
+      <h2>Módulo 1</h2>
+      <div class="card" onclick="abrirAula('4JGlMIsn3o8',1)">Aula 1</div>
+      <div class="card" onclick="abrirAula('TknQZLggxxY',2)">Aula 2</div>
+    `;
+  }
+
+  if(modulo == 2){
+    conteudo = `
+      <h2>Módulo 2</h2>
+      <div class="card" onclick="abrirAula('mpOl2ue1eZo',3)">Aula 1</div>
+    `;
+  }
+
+  if(modulo == 3){
+    conteudo = `
+      <h2>Módulo 3</h2>
+      <div class="card" onclick="abrirAula('4JGlMIsn3o8',4)">Aula 1</div>
+    `;
+  }
+
+  if(modulo == 4){
+    conteudo = `
+      <h2>Módulo 4</h2>
+      <div class="card" onclick="abrirAula('TknQZLggxxY',5)">Aula 1</div>
+    `;
+  }
+
+  if(modulo == 5){
+    conteudo = `
+      <h2>Módulo 5</h2>
+      <div class="card" onclick="abrirAula('mpOl2ue1eZo',6)">Aula 1</div>
+    `;
+  }
+
+  document.getElementById("aulas").innerHTML = conteudo + `
+    <br>
+    <button onclick="voltarModulos()">⬅ Voltar</button>
+  `;
+}
+
+// BÔNUS
+function abrirBonus(){
+
+  document.getElementById("home").style.display="none";
+  document.getElementById("aulas").style.display="block";
+
+  document.getElementById("aulas").innerHTML = `
+    <h2>🎁 Bônus</h2>
+
+    <div class="card" onclick="abrirAula('4JGlMIsn3o8',7)">Bônus 1</div>
+    <div class="card" onclick="abrirAula('TknQZLggxxY',8)">Bônus 2</div>
+
+    <br>
+    <button onclick="voltarModulos()">⬅ Voltar</button>
+  `;
+}
+
+// AULA
+function abrirAula(videoId,id){
+
+  document.getElementById("aulas").style.display="none";
+  document.getElementById("aula").style.display="block";
+
+  document.getElementById("aula").innerHTML = `
+    <iframe width="100%" height="250"
+    src="https://www.youtube.com/embed/${videoId}"></iframe>
+
+    <br><br>
+
+    <button onclick="concluirAula(${id})">✅ Concluir aula</button>
+
+    <br><br>
+
+    <a href="https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3">
+      <button>📄 Baixar PDF</button>
+    </a>
+
+    <br><br>
+
+    <button onclick="voltarAulas()">⬅ Voltar</button>
+  `;
+}
+
+// VOLTAR
+function voltarModulos(){
+  document.getElementById("home").style.display="block";
+  document.getElementById("aulas").style.display="none";
+}
+
+function voltarAulas(){
+  document.getElementById("aulas").style.display="block";
+  document.getElementById("aula").style.display="none";
+}
+
 </script>
 
 </body>
