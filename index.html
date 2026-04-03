@@ -1,27 +1,165 @@
-Quiero que edites mi aplicación.
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso</title>
 
-Dentro del Módulo 2, agrega una nueva clase (aula).
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background:#f7f2ff;
+}
 
-Título de la clase:
-"Aula 1 - Materiales necesarios"
+/* LOGIN */
+#login {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
 
-La clase debe incluir:
+input {
+  padding:12px;
+  width:250px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:10px;
+}
 
-1. Un video de YouTube usando este embed:
+button {
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(45deg,#ff6ec7,#b36cff);
+  color:white;
+}
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/TknQZLggxxY" frameborder="0" allowfullscreen></iframe>
+/* HEADER */
+.header {
+  background:linear-gradient(45deg,#ff6ec7,#b36cff);
+  padding:20px;
+  color:white;
+  border-radius:0 0 20px 20px;
+}
 
-2. Un botón para descargar el PDF con este enlace:
-   https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3
+.profile {
+  display:flex;
+  align-items:center;
+}
 
-Texto del botón:
-"📄 Descargar PDF"
+.profile img {
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  margin-right:10px;
+}
 
-3. Un botón para marcar la clase como completada.
+/* MÓDULOS */
+.module {
+  background:white;
+  margin:15px;
+  padding:15px;
+  border-radius:15px;
+}
 
-4. Mantener el diseño con colores rosa y lila, con bordes redondeados y estilo moderno.
+.lesson {
+  background:#f2eaff;
+  padding:10px;
+  margin-top:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
 
-5. La clase debe aparecer dentro de la lista de clases del Módulo 2.
+/* AULA */
+#player {
+  display:none;
+  padding:20px;
+  background:linear-gradient(#fff0f7,#f5ecff);
+}
 
-Haz que todo sea responsivo y funcione bien en celular.
+iframe {
+  width:100%;
+  height:200px;
+  border-radius:10px;
+}
 
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <h2>Entrar</h2>
+  <input type="email" id="email" placeholder="Seu e-mail">
+  <button onclick="entrar()">Entrar</button>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+  <div class="header">
+    <div class="profile">
+      <img src="https://drive.google.com/uc?export=view&id=1e716mn7N1q8p6-WrZEFTcEU3mvj7Xbjp">
+      <div>
+        <h3>Olá 🌸</h3>
+        <small>Bem-vinda</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- MÓDULOS -->
+  <div id="modules">
+
+    <div class="module">
+      <h3>Módulo 1</h3>
+      <div class="lesson" onclick="abrirAula()">
+        Aula 1
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AULA -->
+  <div id="player">
+    <h3>🌸 Aula</h3>
+
+    <iframe src="https://www.youtube.com/embed/4JGlMIsn3o8"></iframe>
+
+    <br><br>
+
+    <a href="https://drive.google.com/uc?export=download&id=1R2P2adIHsgKgn8rI_UQb8jIPK_ZFxCh3">
+      <button>📄 Baixar PDF</button>
+    </a>
+
+    <br><br>
+
+    <button onclick="voltar()">Voltar</button>
+  </div>
+
+</div>
+
+<script>
+
+function entrar(){
+  login.style.display="none";
+  app.style.display="block";
+}
+
+function abrirAula(){
+  modules.style.display="none";
+  player.style.display="block";
+}
+
+function voltar(){
+  modules.style.display="block";
+  player.style.display="none";
+}
+
+</script>
+
+</body>
+</html>
